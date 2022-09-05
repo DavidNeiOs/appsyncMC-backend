@@ -1,0 +1,16 @@
+{
+  "name": "appsyncmc-backend",
+  "private": "true",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DavidNeiOs/appsyncMC-backend.git",
+  "author": "DavidNeiOs <davidneios25@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "sls": "sls"
+  },
+  "devDependencies": {
+    "serverless": "^3.22.0",
+    "serverless-appsync-plugin": "^1.14.0"
+  }
+}
