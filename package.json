@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "serverless": "^3.22.0",
-    "serverless-appsync-plugin": "^1.14.0"
+    "serverless-appsync-plugin": "^1.14.0",
+    "serverless-iam-roles-per-function": "^3.2.0"
   }
 }
