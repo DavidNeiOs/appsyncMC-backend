@@ -10,7 +10,7 @@ provider:
   runtime: nodejs12.x
   region: us-east-2
   environment:
-    STAGE: ${self:custom.stage, 'dev'}
+    STAGE: ${self:custom.stage}
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
 
 package:
@@ -19,7 +19,7 @@ package:
     - package.json
 
 custom:
-  stage: ${opt:stage, self:provider.stage}
+  stage: ${sls:stage}
   appSync:
     - ${file(serverless.appsync-api.yml)}
 
@@ -66,8 +66,16 @@ resources:
             Name: name
             Required: false
             Mutable: true
-        # LambdaConfig:
-        #   PostConfirmation: !GetAtt CognitoUserPool
+        LambdaConfig:
+          PostConfirmation: !GetAtt ConfirmUserSignupLambdaFunction.Arn
+
+    UserPoolInvokeConfirmUserSignupLambdaPermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        Action: lambda:invokeFunction
+        FunctionName: !Ref ConfirmUserSignupLambdaFunction
+        Principal: cognito-idp.amazonaws.com
+        SourceArn: !GetAtt CognitoUserPool.Arn
 
     WebUserPoolClient:
       Type: AWS::Cognito::UserPoolClient
