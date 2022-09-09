@@ -8,10 +8,11 @@
   "license": "MIT",
   "scripts": {
     "sls": "sls",
-    "export-env": "sls export-env --all",
+    "export-env": "sls export-env --all --overwrite",
     "deploy": "sls deploy",
     "remove": "sls remove",
-    "integration-test": "jest --verbose ./__tests__/test_cases/integration"
+    "integration-test": "jest --verbose ./__tests__/test_cases/integration",
+    "e2e-test": "jest --verbose ./__tests__/test_cases/e2e"
   },
   "devDependencies": {
     "@types/jest": "^29.0.0",
