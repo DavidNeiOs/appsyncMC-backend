@@ -4,6 +4,7 @@ frameworkVersion: "3"
 plugins:
   - serverless-appsync-plugin
   - serverless-iam-roles-per-function
+  - serverless-export-env
 
 provider:
   name: aws
@@ -19,15 +20,21 @@ package:
     - package.json
 
 custom:
-  stage: ${sls:stage}
   appSync:
     - ${file(serverless.appsync-api.yml)}
+  export-env:
+    overwrite: true
+  stage: ${sls:stage}
 
 functions:
   confirmUserSignup:
     handler: functions/confirm-user-signup.handler
     environment:
       USERS_TABLE: !Ref UsersTable
+    iamRoleStatements:
+      - Effect: Allow
+        Action: dynamodb:PutItem
+        Resource: !GetAtt UsersTable.Arn
 
 resources:
   Resources:
