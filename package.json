@@ -11,11 +11,14 @@
     "export-env": "sls export-env --all --overwrite",
     "deploy": "sls deploy",
     "remove": "sls remove",
+    "unit-test": "jest --verbose ./__tests__/test_cases/unit",
     "integration-test": "jest --verbose ./__tests__/test_cases/integration",
     "e2e-test": "jest --verbose ./__tests__/test_cases/e2e"
   },
   "devDependencies": {
     "@types/jest": "^29.0.0",
+    "amplify-appsync-simulator": "^2.4.1",
+    "amplify-velocity-template": "^1.4.8",
     "aws-sdk": "^2.1211.0",
     "jest": "^29.0.2",
     "serverless": "^3.22.0",
