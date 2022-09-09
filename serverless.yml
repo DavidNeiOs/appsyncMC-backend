@@ -13,7 +13,6 @@ provider:
   environment:
     STAGE: ${self:custom.stage}
     AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1"
-    WEB_COGNITO_USER_POOL_CLIENT_ID: !Ref WebUserPoolClient
 
 package:
   exclude:
