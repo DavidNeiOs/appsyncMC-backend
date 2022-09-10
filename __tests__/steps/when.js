@@ -32,7 +32,7 @@ const we_invoke_confirmUserSignup = async (username, name, email) => {
   await handler(event, context);
 };
 
-const we_invoke_image_upload_url = (username, extension, contentType) => {
+const we_invoke_image_upload_url = async (username, extension, contentType) => {
   const handler = require("../../functions/get-upload-url").handler;
 
   const context = {};
@@ -46,7 +46,7 @@ const we_invoke_image_upload_url = (username, extension, contentType) => {
     },
   };
 
-  return handler(event, context);
+  return await handler(event, context);
 };
 
 const a_user_signs_up = async (password, name, email) => {
@@ -175,6 +175,30 @@ const a_user_calls_editMyProfile = async (user, input) => {
   return profile;
 };
 
+const a_user_calls_getImageUploadUrl = async (user, extension, contentType) => {
+  const getImageUploadurl = `query GetImageUploadUrl($extension: String, $contentType: String) {
+    getImageUploadUrl(extension: $extension, contentType: $contentType)
+  }`;
+
+  const variables = {
+    extension,
+    contentType,
+  };
+
+  const data = await GraphQL(
+    process.env.API_URL,
+    getImageUploadurl,
+    variables,
+    user.accessToken
+  );
+
+  const url = data.getImageUploadUrl;
+
+  console.log(`[${user.username}] - got image upload url`);
+
+  return url;
+};
+
 module.exports = {
   we_invoke_confirmUserSignup,
   we_invoke_image_upload_url,
@@ -182,4 +206,5 @@ module.exports = {
   we_invoke_an_appsync_template,
   a_user_calls_getMyProfile,
   a_user_calls_editMyProfile,
+  a_user_calls_getImageUploadUrl,
 };
