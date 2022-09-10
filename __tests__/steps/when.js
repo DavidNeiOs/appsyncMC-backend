@@ -215,6 +215,36 @@ const we_invoke_tweet = async (username, text) => {
   return await handler(event, context);
 };
 
+const a_user_calls_tweet = async (user, text) => {
+  const tweet = `mutation tweet($text: String!) {
+    tweet(text: $text){
+      id
+      createdAt
+      text
+      replies
+      likes
+      retweets
+    }
+  }`;
+
+  const variables = {
+    text,
+  };
+
+  const data = await GraphQL(
+    process.env.API_URL,
+    tweet,
+    variables,
+    user.accessToken
+  );
+
+  const newTweet = data.tweet;
+
+  console.log(`[${user.username}] - posted new tweet`);
+
+  return newTweet;
+};
+
 module.exports = {
   we_invoke_confirmUserSignup,
   we_invoke_image_upload_url,
@@ -224,4 +254,5 @@ module.exports = {
   a_user_calls_editMyProfile,
   a_user_calls_getImageUploadUrl,
   we_invoke_tweet,
+  a_user_calls_tweet,
 };
