@@ -91,16 +91,7 @@ const we_invoke_an_appsync_template = (templatePath, context) => {
     escape: false,
   });
 
-  try {
-    return JSON.parse(compiler.render(context));
-  } catch (e) {
-    console.log(
-      "TO PARSE",
-      compiler.render(context),
-      compiler.render(context).substr(0, 378)
-    );
-    console.error(e);
-  }
+  return JSON.parse(compiler.render(context));
 };
 
 const a_user_calls_getMyProfile = async (user) => {

@@ -17,7 +17,7 @@ describe("Query.getTweets.request template", () => {
     );
 
     expect(() =>
-      whenwhen.we_invoke_an_appsync_template(templatePath, context)
+      when.we_invoke_an_appsync_template(templatePath, context)
     ).toThrow();
   });
 });
