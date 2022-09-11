@@ -1,6 +1,6 @@
-#if ($context.arguments.limit > 25)
-  $util.error("max limit is 25")
-#end
+#set ($isValidLimit = $context.arguments.limit <= 25)
+$util.validate($isValidLimit, "Max limit is 25", "Test")
+
 
 {
   "version" : "2018-05-29",
@@ -16,5 +16,5 @@
   "limit" : $util.toJson($context.arguments.limit),
   "scanIndexForward" : false,
   "consistentRead" : false,
-  "select" : "ALL_ATTRIBUTES",    
+  "select" : "ALL_ATTRIBUTES"   
 }

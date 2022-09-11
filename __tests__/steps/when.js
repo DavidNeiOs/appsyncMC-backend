@@ -97,7 +97,7 @@ const we_invoke_an_appsync_template = (templatePath, context) => {
     console.log(
       "TO PARSE",
       compiler.render(context),
-      compiler.render(context).substr(0, 785)
+      compiler.render(context).substr(0, 378)
     );
     console.error(e);
   }
