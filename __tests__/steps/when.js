@@ -175,7 +175,14 @@ const we_invoke_an_appsync_template = (templatePath, context) => {
 const a_user_calls_getMyProfile = async (user) => {
   const getMyProfile = `query MyQuery {
     getMyProfile {
-      ... myProfileFields    
+      ... myProfileFields
+      
+      tweets {
+        nextToken 
+        tweets {
+          ... iTweetFields
+        }
+      }
     }
   }`;
 
@@ -197,6 +204,13 @@ const a_user_calls_editMyProfile = async (user, input) => {
   const getMyProfile = `mutation EditMyProfile($input: ProfileInput!) {
     editMyProfile(newProfile: $input) {
       ... myProfileFields
+
+      tweets {
+        nextToken 
+        tweets {
+          ... iTweetFields
+        }
+      }
     }
   }`;
 

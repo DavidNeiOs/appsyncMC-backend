@@ -50,6 +50,9 @@ mappingTemplates:
   - type: UnhydratedTweetsPage
     field: tweets
     dataSource: tweetsTable
+  - type: MyProfile
+    field: tweets
+    dataSource: tweetsTable
 
 dataSources:
   - type: NONE
